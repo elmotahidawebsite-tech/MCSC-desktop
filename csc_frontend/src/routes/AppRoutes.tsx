@@ -1,0 +1,117 @@
+import { Routes, Route, Navigate } from "react-router-dom";
+import AdminDashboard from "../pages/admin/Cases";
+import UserDashboard from "../pages/user/Dashboard";
+import DashboardLayout from "../layouts/DashboardLayout";
+import Users from "../pages/admin/Users/Users";
+// import Cases from "../pages/admin/Cases";
+import Settings from "../pages/admin/Settings/Settings";
+import CaseInfo from "../pages/user/ciriminal/CaseInfo";
+import VictimsSuspectsReporters from "../pages/user/ciriminal/VictimsSuspectsReporters";
+import Evidence from "../pages/user/ciriminal/Evidence";
+import Review from "../pages/user/ciriminal/Review";
+import AdminCaseDetail from "../pages/admin/criminal/CaseDetail";
+import CorpsesCaseInfo from "../pages/user/corpses/CorpsesCaseInfo";
+import CorpsesSpecifications from "../pages/user/corpses/CorpsesSpecifications";
+import CorpsesReview from "../pages/user/corpses/CorpsesReview";
+import CivilCaseInfo from "../pages/user/civil/civilCaseInfo";
+import CivilReview from "../pages/user/civil/CivilReview";
+import AdminCriminalReview from "../pages/admin/criminal/CriminalReview";
+import AdminCivilReview from "../pages/admin/civil/CivilReview";
+
+export default function AppRoutes() {
+  return (
+    <Routes>
+      <Route element={<DashboardLayout />}>
+            <Route
+              path="/admin/dashboard"
+              element={<AdminDashboard />}
+            />
+
+            <Route
+              path="/admin/users"
+              element={<Users />}
+            />
+
+            
+
+            <Route
+              path="/admin/cases/:id"
+              element={<AdminCaseDetail />}
+            />
+
+            {/* Admin Review Routes for different case types */}
+            <Route
+              path="/admin/cases/:caseId/criminal/review"
+              element={<AdminCriminalReview />}
+            />
+            
+            <Route
+              path="/admin/cases/:caseId/civil/review"
+              element={<AdminCivilReview />}
+            />
+
+            <Route
+              path="/admin/settings"
+              element={<Settings />}
+            />
+
+            <Route
+              path="/user/dashboard"
+              element={<UserDashboard />}
+            />
+            <Route
+              path="/user/cases/info"
+              element={<CaseInfo />}
+            />
+            <Route
+              path="/user/cases/victims-suspects-reporters"
+              element={<VictimsSuspectsReporters />}
+            />
+            <Route
+              path="/user/cases/evidence"
+              element={<Evidence />}
+            />
+            <Route
+              path="/user/cases/review"
+              element={<Review />}
+            />
+
+            {/* User - Corpses Case Flow (3 steps) */}
+            <Route
+              path="/user/corpses/info"
+              element={<CorpsesCaseInfo />}
+            />
+            <Route
+              path="/user/corpses/specifications"
+              element={<CorpsesSpecifications />}
+            />
+            <Route
+              path="/user/corpses/review"
+              element={<CorpsesReview />}
+            />
+
+            {/* User - Civil Case Flow (2 steps - info + review) */}
+            <Route
+              path="/user/civil/info"
+              element={<CivilCaseInfo />}
+            />
+            <Route
+              path="/user/civil/review"
+              element={<CivilReview />}
+            />
+      </Route>
+
+      {/* Home */}
+      <Route
+        path="/"
+        element={<Navigate to="/admin/dashboard" replace />}
+      />
+
+      {/* 404 */}
+      <Route
+        path="*"
+        element={<h1>404 - Page Not Found</h1>}
+      />
+    </Routes>
+  );
+}
